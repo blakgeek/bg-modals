@@ -255,7 +255,7 @@ angular.module('bg.modals').factory('bgModals', ['$rootScope', '$q', function bg
 
 	};
 }]);
-angular.module('blakgeek.modals').run(['$templateCache', function($templateCache) {
+angular.module('bg.modals').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('/templates/bgmAlert.html',

@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 		ngtemplates: {
 			all: {
 				options: {
-					module: 'blakgeek.modals',
+					module: 'bg.modals',
 					prefix: '/',
 					htmlmin: {
 						collapseWhitespace: true
