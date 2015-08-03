@@ -1,4 +1,4 @@
-angular.module('blakgeek.modals', []);
+angular.module('bg.modals', []);
 /**
  * Created by blakgeek on 6/21/15.
  */
@@ -20,8 +20,29 @@ angular.module('blakgeek.modals', []);
 		}
 	}
 
-	angular.module('blakgeek.modals')
+	angular.module('bg.modals')
 		.directive('bgmAlert', directive);
+})();
+(function() {
+
+
+	function controller($element, $attrs) {
+
+	}
+
+	function directive() {
+
+		return {
+			scope: {},
+			restrict: 'E',
+			transclude: true,
+			templateUrl: '/templates/bgmButtons.html',
+			controller: controller
+		}
+	}
+
+	angular.module('bg.modals')
+		.directive('bgmButtons', directive);
 })();
 (function() {
 
@@ -41,16 +62,28 @@ angular.module('blakgeek.modals', []);
 		}
 	}
 
-	angular.module('blakgeek.modals')
+	angular.module('bg.modals')
 		.directive('bgmConfirm', directive);
 })();
 (function() {
 
 	function controller($element, $rootScope, $transclude, bgModals) {
 
-		console.log($transclude);
-
 		var bgmId = this.bgmId || bgModals.getId();
+
+		$transclude(function(content) {
+
+			var main = $element.find('main');
+
+			for(var i=0; i<content.length; i++) {
+
+				if(content[i].tagName === 'BGM-BUTTONS') {
+					$element.append(content[i]);
+				} else {
+					main.appendChild(content[i]);
+				}
+			}
+		});
 
 		this.close = function() {
 			$rootScope.$emit('bgm:rejected', bgmId);
@@ -100,17 +133,13 @@ angular.module('blakgeek.modals', []);
 			},
 			restrict: 'E',
 			transclude: true,
-			replace: true,
 			require: '^bgmModals',
-			compile: function() {
-				console.log(arguments);
-			},
 			templateUrl: '/templates/bgmModal.html',
 			controller: ['$element', '$rootScope', '$transclude', 'bgModals', controller]
 		}
 	}
 
-	angular.module('blakgeek.modals')
+	angular.module('bg.modals')
 		.directive('bgmModal', directive);
 
 })();
@@ -144,17 +173,16 @@ angular.module('blakgeek.modals', []);
 			controllerAs: 'bgmModals',
 			restrict: 'E',
 			transclude: true,
-			replace: true,
 			templateUrl: '/templates/bgmModals.html',
 			controller: ['$rootScope', '$element', '$attrs', controller]
 		}
 	}
 
-	angular.module('blakgeek.modals')
+	angular.module('bg.modals')
 		.directive('bgmModals', directive);
 })();
 
-angular.module('blakgeek.modals').factory('bgModals', ['$rootScope', '$q', function bgModals($rootScope, $q) {
+angular.module('bg.modals').factory('bgModals', ['$rootScope', '$q', function bgModals($rootScope, $q) {
 
 	var modalCtr = 0,
 		promises = {};
@@ -241,7 +269,7 @@ angular.module('blakgeek.modals').run(['$templateCache', function($templateCache
 
 
   $templateCache.put('/templates/bgmButtons.html',
-    "<footer><ng-transclude></ng-transclude></footer>"
+    "<ng-transclude></ng-transclude>"
   );
 
 
@@ -251,7 +279,7 @@ angular.module('blakgeek.modals').run(['$templateCache', function($templateCache
 
 
   $templateCache.put('/templates/bgmModal.html',
-    "<div class=\"bgm-modal\"><header><h2>{{bgmModal.title}}</h2><span ng-click=\"bgmModal.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main></div>"
+    "<header><h2>{{bgmModal.title}}</h2><span ng-click=\"bgmModal.close()\" class=\"bgm-btn-close\"></span></header><main></main>"
   );
 
 
