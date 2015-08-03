@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="example">
+    <head>
+        <title>Blakgeek Calendar Example</title>
+        <script src="//use.typekit.net/nuk7nlg.js"></script>
+        <script>try {Typekit.load();} catch(e) {}</script>
+        <link href="reset.css" type="text/css" rel="stylesheet">
+        <link href="../dev/bgmodals.css" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <style>
+            body {
+                font-family: "proxima-nova-soft", sans-serif;
+                font-size: 16px;
+            }
+
+            bgm-modal {
+
+                pointer-events: all;
+            }
+            bgm-modal input {
+                width: 100%;
+            }
+
+            .rise-up {
+                z-index: 500;
+            }
+        </style>
+    </head>
+    <body ng-controller="ExampleCtrl">
+        <bgm-modals>
+            <bgm-modal title="{{title}}" bgm-id="bob">
+                <form>
+                    <input placeholder="enter stuff">
+                    <input placeholder="enter stuff">
+                    <input placeholder="enter stuff">
+                </form>
+                <bgm-buttons>
+                    <button ng-click="sup()">Sup?</button>
+                    <button ng-click="hey()">Hey</button>
+                </bgm-buttons>
+            </bgm-modal>
+            <bgm-modal title="Example Modal II" class="bgm-open"></bgm-modal>
+            <bgm-modal title="Example Modal III" bgm-id="mark" ></bgm-modal>
+        </bgm-modals>
+        <button ng-click="title = 'changed'">Change Modal Title</button>
+        <button ng-click="showModal('bob')">Show Modal Bob</button>
+        <button ng-click="showModal('mark')">Show Modal Mark</button>
+        <button class="rise-up" ng-click="closeAll()">Close All Modals</button>
+        {{title}}
+        <script src="../bower_components/angular/angular.min.js"></script>
+        <script src="../dev/bgmodals.js"></script>
+        <script src="./index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "name": "bg-modals",
+  "version": "0.1.0",
+  "authors": [
+    "blakgeek@gmail.com"
+  ],
+  "description": "Angular directives to make my life easier when dealing w modals",
+  "main": [
+    "dist/bgmodals.js",
+    "dist/bgmodals.css"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angularjs",
+    "modals"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.1",
+    "moment": "~2.10.3"
+  }
+}
