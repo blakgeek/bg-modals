@@ -10,8 +10,7 @@ angular.module('bg.modals', []);
 		var bgmId = this.bgmId || bgModals.getId();
 
 		this.close = function() {
-			$rootScope.$emit('bgm:accept', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
+			bgModals.accept(bgmId);
 		};
 
 		$rootScope.$on('bgm:open', function(e, id) {
@@ -99,13 +98,11 @@ angular.module('bg.modals', []);
 		var bgmId = this.bgmId || bgModals.getId();
 
 		this.reject = function() {
-			$rootScope.$emit('bgm:reject', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
+			bgModals.reject(bgmId);
 		};
 
 		this.accept = function() {
-			$rootScope.$emit('bgm:accept', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
+			bgModals.accept(bgmId);
 		};
 
 		$rootScope.$on('bgm:open', function(e, id) {
@@ -356,7 +353,7 @@ angular.module('bg.modals').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('/templates/bgmAlert.html',
-    "<div class=\"bgm-modal bgm-alert\"><header><h2>{{bgmAlert.title}}</h2><span ng-click=\"bgmAlert.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmAlert.close()\">{{gotIt}}</button></footer></div>"
+    "<div class=\"bgm-modal bgm-alert\"><header><h2>{{bgmAlert.title}}</h2><span ng-click=\"bgmAlert.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmAlert.close()\">{{bgmAlert.gotIt}}</button></footer></div>"
   );
 
 

@@ -26,4 +26,18 @@ angular.module('example', ['bg.modals']).controller('ExampleCtrl', function($sco
 	$scope.hey = function() {
 		console.log('hey')
 	};
+
+	$scope.confirmIt = function() {
+		bgModals.open('confirm').then(function() {
+			console.log('Hola');
+		}).catch(function() {
+			console.log('nothing good can come of this');
+		})
+	};
+
+	$scope.alertIt = function() {
+		bgModals.open('alert').then(function() {
+			console.log('gotcha');
+		});
+	};
 });

@@ -9,8 +9,7 @@
 		var bgmId = this.bgmId || bgModals.getId();
 
 		this.close = function() {
-			$rootScope.$emit('bgm:accept', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
+			bgModals.accept(bgmId);
 		};
 
 		$rootScope.$on('bgm:open', function(e, id) {
