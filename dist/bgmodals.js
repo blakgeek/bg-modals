@@ -10,7 +10,7 @@ angular.module('bg.modals', []);
 		var bgmId = this.bgmId || bgModals.getId();
 
 		this.close = function() {
-			$rootScope.$emit('bgm:rejected', bgmId);
+			$rootScope.$emit('bgm:accept', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 
@@ -167,7 +167,7 @@ angular.module('bg.modals', []);
 
 			var main = $element.find('main');
 
-			for(var i=0; i<content.length; i++) {
+			for(var i = 0; i < content.length; i++) {
 
 				if(content[i].tagName === 'BGM-BUTTONS') {
 					$element.append(content[i]);
@@ -177,8 +177,13 @@ angular.module('bg.modals', []);
 			}
 		});
 
-		this.close = function() {
-			$rootScope.$emit('bgm:rejected', bgmId);
+		this.reject = function() {
+			$rootScope.$emit('bgm:reject', bgmId);
+			$rootScope.$emit('bgm:close', bgmId);
+		};
+
+		this.accept = function() {
+			$rootScope.$emit('bgm:accept', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 

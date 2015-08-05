@@ -9,7 +9,7 @@
 		var bgmId = this.bgmId || bgModals.getId();
 
 		this.close = function() {
-			$rootScope.$emit('bgm:rejected', bgmId);
+			$rootScope.$emit('bgm:accept', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 
