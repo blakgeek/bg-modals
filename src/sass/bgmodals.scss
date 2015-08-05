@@ -41,7 +41,7 @@ bgm-modals {
     pointer-events: all;
   }
 
-  bgm-modal {
+  bgm-modal, bgm-alert, bgm-confirm {
 
     display: block;
     position: absolute;
