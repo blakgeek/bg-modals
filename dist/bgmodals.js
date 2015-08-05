@@ -98,8 +98,13 @@ angular.module('bg.modals', []);
 
 		var bgmId = this.bgmId || bgModals.getId();
 
-		this.close = function() {
-			$rootScope.$emit('bgm:rejected', bgmId);
+		this.reject = function() {
+			$rootScope.$emit('bgm:reject', bgmId);
+			$rootScope.$emit('bgm:close', bgmId);
+		};
+
+		this.accept = function() {
+			$rootScope.$emit('bgm:accept', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 
@@ -167,7 +172,7 @@ angular.module('bg.modals', []);
 
 			var main = $element.find('main');
 
-			for(var i = 0; i < content.length; i++) {
+			for(var i=0; i<content.length; i++) {
 
 				if(content[i].tagName === 'BGM-BUTTONS') {
 					$element.append(content[i]);
@@ -177,13 +182,8 @@ angular.module('bg.modals', []);
 			}
 		});
 
-		this.reject = function() {
-			$rootScope.$emit('bgm:reject', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
-		};
-
-		this.accept = function() {
-			$rootScope.$emit('bgm:accept', bgmId);
+		this.close = function() {
+			$rootScope.$emit('bgm:rejected', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 
@@ -371,7 +371,7 @@ angular.module('bg.modals').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/bgmConfirm.html',
-    "<div class=\"bgm-modal bgm-confirm\"><header><h2>{{bgmConfirm.title}}</h2><span ng-click=\"bgmConfirm.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmConfirm.reject()\">{{bgmConfirm.nope}}</button> <button ng-click=\"bgmConfirm.accept()\">{{bgmConfirm.yep}}</button></footer></div>"
+    "<div class=\"bgm-modal bgm-confirm\"><header><h2>{{bgmConfirm.title}}</h2><span ng-click=\"bgmConfirm.reject()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmConfirm.reject()\">{{bgmConfirm.nope}}</button> <button ng-click=\"bgmConfirm.accept()\">{{bgmConfirm.yep}}</button></footer></div>"
   );
 
 

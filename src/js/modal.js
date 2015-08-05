@@ -8,7 +8,7 @@
 
 			var main = $element.find('main');
 
-			for(var i = 0; i < content.length; i++) {
+			for(var i=0; i<content.length; i++) {
 
 				if(content[i].tagName === 'BGM-BUTTONS') {
 					$element.append(content[i]);
@@ -18,13 +18,8 @@
 			}
 		});
 
-		this.reject = function() {
-			$rootScope.$emit('bgm:reject', bgmId);
-			$rootScope.$emit('bgm:close', bgmId);
-		};
-
-		this.accept = function() {
-			$rootScope.$emit('bgm:accept', bgmId);
+		this.close = function() {
+			$rootScope.$emit('bgm:rejected', bgmId);
 			$rootScope.$emit('bgm:close', bgmId);
 		};
 
