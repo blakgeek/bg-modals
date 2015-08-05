@@ -5,23 +5,67 @@ angular.module('bg.modals', []);
 (function() {
 
 
-	function controller($scope, $element, $attrs) {
+	function controller($element, $rootScope, $transclude, bgModals) {
 
+		var bgmId = this.bgmId || bgModals.getId();
+
+		this.close = function() {
+			$rootScope.$emit('bgm:rejected', bgmId);
+			$rootScope.$emit('bgm:close', bgmId);
+		};
+
+		$rootScope.$on('bgm:open', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.addClass('bgm-open');
+				$rootScope.$emit('bgm:mask');
+			}
+		});
+
+		$rootScope.$on('bgm:close', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.removeClass('bgm-open');
+				$rootScope.$emit('bgm:unmask');
+			}
+		});
+
+		$rootScope.$on('bgm:closeall', function(e, id) {
+
+			$element.removeClass('bgm-open');
+		});
+
+		$rootScope.$on('bgm:toggle', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.toggleClass('bgm-open');
+			}
+		});
 	}
 
 	function directive() {
 
 		return {
-			scope: {},
+			scope: true,
+			controllerAs: 'bgmModal',
+			bindToController: {
+				title: "@bgmTitle",
+				bgmId: '@',
+				gotIt: '@bgmOkText'
+			},
 			restrict: 'E',
 			transclude: true,
+			require: '^bgmModals',
 			templateUrl: '/templates/bgmAlert.html',
-			controller: controller
+			controller: ['$element', '$rootScope', '$transclude', 'bgModals', controller]
 		}
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmAlert', directive);
+		.directive('bgmModal', directive);
 })();
 (function() {
 
@@ -44,26 +88,74 @@ angular.module('bg.modals', []);
 	angular.module('bg.modals')
 		.directive('bgmButtons', directive);
 })();
+/**
+ * Created by blakgeek on 6/21/15.
+ */
 (function() {
 
 
-	function controller($element, $attrs) {
+	function controller($element, $rootScope, $transclude, bgModals) {
 
+		var bgmId = this.bgmId || bgModals.getId();
+
+		this.close = function() {
+			$rootScope.$emit('bgm:rejected', bgmId);
+			$rootScope.$emit('bgm:close', bgmId);
+		};
+
+		$rootScope.$on('bgm:open', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.addClass('bgm-open');
+				$rootScope.$emit('bgm:mask');
+			}
+		});
+
+		$rootScope.$on('bgm:close', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.removeClass('bgm-open');
+				$rootScope.$emit('bgm:unmask');
+			}
+		});
+
+		$rootScope.$on('bgm:closeall', function(e, id) {
+
+			$element.removeClass('bgm-open');
+		});
+
+		$rootScope.$on('bgm:toggle', function(e, id) {
+
+			if(id === bgmId) {
+
+				$element.toggleClass('bgm-open');
+			}
+		});
 	}
 
 	function directive() {
 
 		return {
-			scope: {},
+			scope: true,
+			controllerAs: 'bgmModal',
+			bindToController: {
+				title: "@bgmTitle",
+				bgmId: '@',
+				yep: '@bgmYepText',
+				nope: '@bgmNopeText'
+			},
 			restrict: 'E',
 			transclude: true,
+			require: '^bgmModals',
 			templateUrl: '/templates/bgmConfirm.html',
-			controller: controller
+			controller: ['$element', '$rootScope', '$transclude', 'bgModals', controller]
 		}
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmConfirm', directive);
+		.directive('bgmModal', directive);
 })();
 (function() {
 
@@ -80,7 +172,7 @@ angular.module('bg.modals', []);
 				if(content[i].tagName === 'BGM-BUTTONS') {
 					$element.append(content[i]);
 				} else {
-					main.appendChild(content[i]);
+					main.append(content[i]);
 				}
 			}
 		});
@@ -128,7 +220,7 @@ angular.module('bg.modals', []);
 			scope: true,
 			controllerAs: 'bgmModal',
 			bindToController: {
-				title: "@",
+				title: "@bgmTitle",
 				bgmId: '@'
 			},
 			restrict: 'E',

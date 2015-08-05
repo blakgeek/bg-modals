@@ -13,7 +13,7 @@
 				if(content[i].tagName === 'BGM-BUTTONS') {
 					$element.append(content[i]);
 				} else {
-					main.appendChild(content[i]);
+					main.append(content[i]);
 				}
 			}
 		});
@@ -61,7 +61,7 @@
 			scope: true,
 			controllerAs: 'bgmModal',
 			bindToController: {
-				title: "@",
+				title: "@bgmTitle",
 				bgmId: '@'
 			},
 			restrict: 'E',
