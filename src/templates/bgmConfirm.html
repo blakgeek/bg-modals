@@ -1,13 +1,13 @@
 <div class="bgm-modal bgm-confirm">
     <header>
-        <h2>{{title}}</h2>
-        <span ng-click="close()" class="bgm-btn-close"></span>
+        <h2>{{bgmConfirm.title}}</h2>
+        <span ng-click="bgmConfirm.close()" class="bgm-btn-close"></span>
     </header>
     <main>
         <ng-transclude></ng-transclude>
     </main>
     <footer>
-        <button ng-click="reject()">{{nope}}</button>
-        <button ng-click="accept()">{{yep}}</button>
+        <button ng-click="bgmConfirm.reject()">{{bgmConfirm.nope}}</button>
+        <button ng-click="bgmConfirm.accept()">{{bgmConfirm.yep}}</button>
     </footer>
 </div>

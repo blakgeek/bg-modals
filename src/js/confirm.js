@@ -49,7 +49,7 @@
 
 		return {
 			scope: true,
-			controllerAs: 'bgmModal',
+			controllerAs: 'bgmConfirm',
 			bindToController: {
 				title: "@bgmTitle",
 				bgmId: '@',
@@ -65,5 +65,5 @@
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmModal', directive);
+		.directive('bgmConfirm', directive);
 })();

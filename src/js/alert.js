@@ -49,7 +49,7 @@
 
 		return {
 			scope: true,
-			controllerAs: 'bgmModal',
+			controllerAs: 'bgmAlert',
 			bindToController: {
 				title: "@bgmTitle",
 				bgmId: '@',
@@ -64,5 +64,5 @@
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmModal', directive);
+		.directive('bgmAlert', directive);
 })();

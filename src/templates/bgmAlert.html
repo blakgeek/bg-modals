@@ -1,12 +1,12 @@
 <div class="bgm-modal bgm-alert">
     <header>
-        <h2>{{title || staticTitle}}</h2>
-        <span ng-click="close()" class="bgm-btn-close"></span>
+        <h2>{{bgmAlert.title}}</h2>
+        <span ng-click="bgmAlert.close()" class="bgm-btn-close"></span>
     </header>
     <main>
         <ng-transclude></ng-transclude>
     </main>
     <footer>
-        <button ng-click="close()">{{gotIt}}</button>
+        <button ng-click="bgmAlert.close()">{{gotIt}}</button>
     </footer>
 </div>

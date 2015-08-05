@@ -50,7 +50,7 @@ angular.module('bg.modals', []);
 
 		return {
 			scope: true,
-			controllerAs: 'bgmModal',
+			controllerAs: 'bgmAlert',
 			bindToController: {
 				title: "@bgmTitle",
 				bgmId: '@',
@@ -65,7 +65,7 @@ angular.module('bg.modals', []);
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmModal', directive);
+		.directive('bgmAlert', directive);
 })();
 (function() {
 
@@ -139,7 +139,7 @@ angular.module('bg.modals', []);
 
 		return {
 			scope: true,
-			controllerAs: 'bgmModal',
+			controllerAs: 'bgmConfirm',
 			bindToController: {
 				title: "@bgmTitle",
 				bgmId: '@',
@@ -155,7 +155,7 @@ angular.module('bg.modals', []);
 	}
 
 	angular.module('bg.modals')
-		.directive('bgmModal', directive);
+		.directive('bgmConfirm', directive);
 })();
 (function() {
 
@@ -351,7 +351,7 @@ angular.module('bg.modals').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('/templates/bgmAlert.html',
-    "<div class=\"bgm-modal bgm-alert\"><header><h2>{{title || staticTitle}}</h2><span ng-click=\"close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"close()\">{{gotIt}}</button></footer></div>"
+    "<div class=\"bgm-modal bgm-alert\"><header><h2>{{bgmAlert.title}}</h2><span ng-click=\"bgmAlert.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmAlert.close()\">{{gotIt}}</button></footer></div>"
   );
 
 
@@ -366,7 +366,7 @@ angular.module('bg.modals').run(['$templateCache', function($templateCache) {
 
 
   $templateCache.put('/templates/bgmConfirm.html',
-    "<div class=\"bgm-modal bgm-confirm\"><header><h2>{{title}}</h2><span ng-click=\"close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"reject()\">{{nope}}</button> <button ng-click=\"accept()\">{{yep}}</button></footer></div>"
+    "<div class=\"bgm-modal bgm-confirm\"><header><h2>{{bgmConfirm.title}}</h2><span ng-click=\"bgmConfirm.close()\" class=\"bgm-btn-close\"></span></header><main><ng-transclude></ng-transclude></main><footer><button ng-click=\"bgmConfirm.reject()\">{{bgmConfirm.nope}}</button> <button ng-click=\"bgmConfirm.accept()\">{{bgmConfirm.yep}}</button></footer></div>"
   );
 
 
