@@ -12,7 +12,7 @@
 			restrict: 'E',
 			transclude: true,
 			templateUrl: '/templates/bgmButtons.html',
-			controller: controller
+			controller: ['$element', '$attrs', controller]
 		}
 	}
 
