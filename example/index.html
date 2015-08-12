@@ -17,6 +17,7 @@
 
                 pointer-events: all;
             }
+
             bgm-modal input {
                 width: 100%;
             }
@@ -27,7 +28,7 @@
         </style>
     </head>
     <body ng-controller="ExampleCtrl">
-        <bgm-modals>
+        <bgm-modals bgm-group="group1">
             <bgm-modal bgm-title="{{title}}" bgm-id="bob">
                 <form>
                     <input placeholder="enter stuff">
@@ -39,8 +40,27 @@
                     <button ng-click="hey()">Hey</button>
                 </bgm-buttons>
             </bgm-modal>
-            <bgm-modal bgm-title="Example Modal II" class="bgm-open"></bgm-modal>
-            <bgm-modal bgm-title="Example Modal III" bgm-id="mark" ></bgm-modal>
+            <bgm-modal bgm-title="Group I Example Modal II" class="bgm-open"></bgm-modal>
+            <bgm-modal bgm-title="Group I Example Modal III" bgm-id="mark"></bgm-modal>
+            <bgm-confirm bgm-title="Confirm This" bgm-id="confirm" bgm-yep-text="Yep" bgm-nope-text="Nope">
+                Do you really wanna do this?
+            </bgm-confirm>
+            <bgm-alert bgm-title="Guess What?" bgm-id="alert" bgm-ok-text="Okey Dokey">
+                You've been put on alert.
+            </bgm-alert>
+        </bgm-modals>
+        <bgm-modals bgm-group="group2">
+            <bgm-modal bgm-title="{{title}}" bgm-id="bob">
+                <form>
+                    <input placeholder="enter stuff">
+                </form>
+                <bgm-buttons>
+                    <button ng-click="sup()">Sup?</button>
+                    <button ng-click="hey()">Hey</button>
+                </bgm-buttons>
+            </bgm-modal>
+            <bgm-modal bgm-title="Group II Example Modal II" class="bgm-open"></bgm-modal>
+            <bgm-modal bgm-title="Group II Example Modal III" bgm-id="mark"></bgm-modal>
             <bgm-confirm bgm-title="Confirm This" bgm-id="confirm" bgm-yep-text="Yep" bgm-nope-text="Nope">
                 Do you really wanna do this?
             </bgm-confirm>
@@ -49,7 +69,8 @@
             </bgm-alert>
         </bgm-modals>
         <button ng-click="title = 'changed'">Change Modal Title</button>
-        <button ng-click="showModal('bob')">Show Modal Bob</button>
+        <button ng-click="showModal('group1.bob')">Show Modal Bob I</button>
+        <button ng-click="showModal('group2.bob')">Show Modal Bob II</button>
         <button ng-click="showModal('mark')">Show Modal Mark</button>
         <button ng-click="confirmIt()">Confirm It</button>
         <button ng-click="alertIt()">Alert!</button>

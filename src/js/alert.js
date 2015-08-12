@@ -3,41 +3,46 @@
  */
 (function() {
 
+	function controller($element, $rootScope, $attrs, bgModals) {
 
-	function controller($element, $rootScope, $transclude, bgModals) {
+		var modalsController = $element.inheritedData('$bgmModalsController'),
+			self = this;
 
-		var bgmId = this.bgmId || bgModals.getId();
+		self.group = modalsController.group;
+		self.id = (self.group ? self.group + '.' : '') + ($attrs.bgmId || bgModals.getId());
 
 		this.close = function() {
-			bgModals.accept(bgmId);
+			bgModals.accept(self.id);
 		};
 
 		$rootScope.$on('bgm:open', function(e, id) {
 
-			if(id === bgmId) {
+			if(id === self.id) {
 
 				$element.addClass('bgm-open');
-				$rootScope.$emit('bgm:mask');
+				$rootScope.$emit('bgm:mask', self.group);
 			}
 		});
 
 		$rootScope.$on('bgm:close', function(e, id) {
 
-			if(id === bgmId) {
+			if(id === self.id) {
 
 				$element.removeClass('bgm-open');
-				$rootScope.$emit('bgm:unmask');
+				$rootScope.$emit('bgm:unmask', self.group);
 			}
 		});
 
-		$rootScope.$on('bgm:closeall', function(e, id) {
+		$rootScope.$on('bgm:closeall', function(e, group) {
 
-			$element.removeClass('bgm-open');
+			if(!group || self.group === group) {
+				$element.removeClass('bgm-open');
+			}
 		});
 
 		$rootScope.$on('bgm:toggle', function(e, id) {
 
-			if(id === bgmId) {
+			if(id === self.id) {
 
 				$element.toggleClass('bgm-open');
 			}
@@ -58,7 +63,7 @@
 			transclude: true,
 			require: '^bgmModals',
 			templateUrl: '/templates/bgmAlert.html',
-			controller: ['$element', '$rootScope', '$transclude', 'bgModals', controller]
+			controller: ['$element', '$rootScope', '$attrs', 'bgModals', controller]
 		}
 	}
 

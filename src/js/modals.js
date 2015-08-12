@@ -1,37 +1,47 @@
+
 (function() {
 
+    function controller($rootScope, $element, $attrs) {
 
-	function controller($rootScope, $element, $attrs) {
+        var self = this;
 
-		$rootScope.$on('bgm:mask', function(e) {
+        $rootScope.$on('bgm:mask', function(e, group) {
 
-			$element.addClass('bgm-modal-masked');
-		});
+            if(self.group === group) {
+                $element.addClass('bgm-modal-masked');
+            }
+        });
 
-		$rootScope.$on('bgm:unmask', function(e) {
+        $rootScope.$on('bgm:unmask', function(e, group) {
 
-			$element.removeClass('bgm-modal-masked');
-		});
+            if(self.group === group) {
+                $element.removeClass('bgm-modal-masked');
+            }
+        });
 
-		$rootScope.$on('bgm:closeall', function(e) {
+        $rootScope.$on('bgm:closeall', function(e, group) {
 
-			$element.removeClass('bgm-modal-masked');
-		});
-	}
+            if(!group || self.group === group) {
+                $element.removeClass('bgm-modal-masked');
+            }
+        });
+    }
 
-	function directive() {
+    function directive() {
 
-		return {
-			scope: true,
-			bindToController: {},
-			controllerAs: 'bgmModals',
-			restrict: 'E',
-			transclude: true,
-			templateUrl: '/templates/bgmModals.html',
-			controller: ['$rootScope', '$element', '$attrs', controller]
-		}
-	}
+        return {
+            scope: true,
+            bindToController: {
+                group: '@bgmGroup'
+            },
+            controllerAs: 'bgmModals',
+            restrict: 'E',
+            transclude: true,
+            templateUrl: '/templates/bgmModals.html',
+            controller: ['$rootScope', '$element', '$attrs', controller]
+        }
+    }
 
-	angular.module('bg.modals')
-		.directive('bgmModals', directive);
-})();
+    angular.module('bg.modals')
+        .directive('bgmModals', directive);
+})();;

@@ -17,10 +17,31 @@ module.exports = function(grunt) {
 		'sass:dev'
 	]);
 
+    grunt.registerTask('example', [
+        'clean:dev',
+        'ngtemplates',
+        'concat:dev',
+        'sass:dev',
+        'concurrent:example'
+    ]);
+
 	// Project configuration.
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
+        concurrent: {
+            example: {
+                tasks: ['serve', 'watch:dev', 'open:example'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        },
+        open: {
+            example: {
+                url: 'http://localhost:9000/example/index.html'
+            }
+        },
 		ngtemplates: {
 			all: {
 				options: {
@@ -78,7 +99,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			dev: {
-				files: 'src/**/*',
+                files: ['src/**/*', 'example/**/*'],
 				tasks: 'dev',
 				options: {
 					livereload: true
